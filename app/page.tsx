@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { supabase, Technology } from '../lib/supabase';
+import ChatBot from '../components/ChatBot';
+import Recommendations from '../components/Recommendations';
 
 const categories = [
   'All',
@@ -83,13 +85,56 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
       {/* Header */}
       <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold text-green-700">
-            ATIO Knowledge Base
-          </h1>
-          <p className="text-gray-600 mt-1">
-            Discover agrifood technologies for sustainable farming
-          </p>
+        <div className="max-w-7xl mx-auto px-4 py-8">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h1 className="text-4xl font-bold text-green-700">
+                ATIO Knowledge Base
+              </h1>
+              <p className="text-gray-600 mt-2">
+                Discover, Compare & Adopt Agrifood Technologies
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <Link
+                href="/analytics"
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              >
+                📊 Analytics
+              </Link>
+              <Link
+                href="/admin"
+                className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
+              >
+                ⚙️ Admin
+              </Link>
+            </div>
+          </div>
+
+          {/* Value Proposition */}
+          <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 border-2 border-green-200">
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+              Accelerating Agrifood Innovation Worldwide
+            </h2>
+            <p className="text-gray-700 mb-4">
+              Access FAO's comprehensive database of agrifood technologies.
+              Compare solutions, get AI-powered recommendations, and find the perfect fit for your region.
+            </p>
+            <div className="flex gap-4 text-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-green-600 font-bold">✓</span>
+                <span>Evidence-based</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-green-600 font-bold">✓</span>
+                <span>LMIC-focused</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-green-600 font-bold">✓</span>
+                <span>AI-assisted</span>
+              </div>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -135,6 +180,7 @@ export default function Home() {
                 <div className="text-sm text-gray-600 mt-1">Showing</div>
               </div>
             </div>
+            <Recommendations technologies={technologies} />
             {/* Search Bar */}
             <div className="max-w-2xl mx-auto mb-12">
               <div className="relative">
@@ -274,6 +320,7 @@ export default function Home() {
           </div>
         </div>
       )}
+      {!loading && !error && <ChatBot technologies={technologies} />}
     </div>
   );
 }
