@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { supabase, Technology } from '../../lib/supabase';
 import Recommendations from '../../components/Recommendations';
 
-export default function RecommendationsPage() {
+function RecommendationsContent() {
     const searchParams = useSearchParams();
     const persona = searchParams.get('persona');
     const [technologies, setTechnologies] = useState<Technology[]>([]);
@@ -99,5 +99,17 @@ export default function RecommendationsPage() {
                 )}
             </main>
         </div>
+    );
+}
+
+export default function RecommendationsPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+                <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-green-600"></div>
+            </div>
+        }>
+            <RecommendationsContent />
+        </Suspense>
     );
 }
