@@ -21,21 +21,22 @@ export default function Recommendations({ technologies }: Props) {
 
     return (
         <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            {/* Section Heading */}
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">
                 🎯 Get Personalized Recommendations
             </h2>
 
             {!showResults ? (
-                <div className="space-y-4">
+                <div className="space-y-6">
                     {/* Region Select */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
                             Your Region
                         </label>
                         <select
                             value={profile.region}
                             onChange={(e) => setProfile({ ...profile, region: e.target.value })}
-                            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 text-gray-900"
                         >
                             <option value="">Select region...</option>
                             <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>
@@ -49,17 +50,17 @@ export default function Recommendations({ technologies }: Props) {
 
                     {/* Budget */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
                             Budget Level
                         </label>
-                        <div className="flex gap-2">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             {(['Low', 'Medium', 'High'] as const).map(level => (
                                 <button
                                     key={level}
                                     onClick={() => setProfile({ ...profile, budget: level })}
-                                    className={`flex-1 py-2 rounded-lg border-2 transition-colors ${profile.budget === level
-                                            ? 'border-green-600 bg-green-50 text-green-800 font-bold'
-                                            : 'border-gray-300 hover:border-green-300'
+                                    className={`py-3 rounded-xl border-2 transition-all ${profile.budget === level
+                                        ? 'border-green-600 bg-green-50 text-green-800 font-bold'
+                                        : 'border-gray-200 hover:border-green-400 text-gray-800'
                                         }`}
                                 >
                                     {level}
@@ -70,21 +71,21 @@ export default function Recommendations({ technologies }: Props) {
 
                     {/* Priority */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
                             What's Most Important?
                         </label>
-                        <div className="flex gap-2">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             {[
                                 { value: 'cost', label: 'Low Cost' },
-                                { value: 'efficiency', label: 'High Efficiency' },
-                                { value: 'sustainability', label: 'Sustainability' }
+                                { value: 'efficiency', label: 'Efficiency' },
+                                { value: 'sustainability', label: 'Impact' }
                             ].map(option => (
                                 <button
                                     key={option.value}
                                     onClick={() => setProfile({ ...profile, priority: option.value as any })}
-                                    className={`flex-1 py-2 rounded-lg border-2 transition-colors ${profile.priority === option.value
-                                            ? 'border-green-600 bg-green-50 text-green-800 font-bold'
-                                            : 'border-gray-300 hover:border-green-300'
+                                    className={`py-3 rounded-xl border-2 transition-all ${profile.priority === option.value
+                                        ? 'border-green-600 bg-green-50 text-green-800 font-bold'
+                                        : 'border-gray-200 hover:border-green-400 text-gray-800'
                                         }`}
                                 >
                                     {option.label}
@@ -93,9 +94,10 @@ export default function Recommendations({ technologies }: Props) {
                         </div>
                     </div>
 
+                    {/* Submit Button */}
                     <button
                         onClick={() => setShowResults(true)}
-                        className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 font-bold"
+                        className="w-full bg-green-600 text-white py-4 rounded-lg hover:bg-green-700 font-bold text-lg"
                     >
                         Get My Recommendations →
                     </button>
@@ -110,7 +112,7 @@ export default function Recommendations({ technologies }: Props) {
                     </button>
 
                     <div className="space-y-3">
-                        <h3 className="font-bold text-lg">Top Recommendations for You:</h3>
+                        <h3 className="font-bold text-xl text-gray-900 mb-6">Top Recommendations for You:</h3>
                         {recommendations.map((tech, idx) => (
                             <div key={tech.id} className="border rounded-lg p-4 hover:border-green-500 transition-colors">
                                 <div className="flex items-start gap-3">
@@ -118,9 +120,9 @@ export default function Recommendations({ technologies }: Props) {
                                     <div className="flex-1">
                                         <div className="flex items-center gap-2 mb-1">
                                             <span className="text-2xl">{tech.icon}</span>
-                                            <h4 className="font-bold text-lg">{tech.name}</h4>
+                                            <h4 className="font-bold text-lg text-gray-900">{tech.name}</h4>
                                         </div>
-                                        <p className="text-sm text-gray-600 mb-2">{tech.description}</p>
+                                        <p className="text-sm text-gray-700 mb-2">{tech.description}</p>
                                         <div className="flex gap-2 text-xs">
                                             <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded">
                                                 {tech.cost} Cost

@@ -48,7 +48,7 @@ function CompareContent() {
             <div className="min-h-screen bg-gray-50 flex items-center justify-center">
                 <div className="text-center">
                     <h1 className="text-4xl font-bold text-gray-800 mb-4">No Technologies Selected</h1>
-                    <p className="text-gray-600 mb-6">Please select technologies to compare from the homepage.</p>
+                    <p className="text-gray-700 mb-6">Please select technologies to compare from the homepage.</p>
                     <Link href="/" className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700">
                         Go to Homepage
                     </Link>
@@ -66,7 +66,7 @@ function CompareContent() {
                         ← Back to all technologies
                     </Link>
                     <h1 className="text-3xl font-bold text-gray-800">Technology Comparison</h1>
-                    <p className="text-gray-600 mt-1">Compare {techsToCompare.length} technologies side by side</p>
+                    <p className="text-gray-700 mt-1">Compare {techsToCompare.length} technologies side by side</p>
                 </div>
             </header>
 
@@ -111,7 +111,7 @@ function CompareContent() {
                                                 }`}>
                                                 {tech.cost}
                                             </div>
-                                            <div className="text-sm text-gray-600 mt-1">{tech.cost_range}</div>
+                                            <div className="text-sm text-gray-700 mt-1">{tech.cost_range}</div>
                                         </td>
                                     ))}
                                 </tr>
@@ -253,7 +253,7 @@ export default function ComparePage() {
                         <div className="absolute top-0 left-0 w-full h-full border-4 border-green-600 rounded-full animate-spin border-t-transparent"></div>
                     </div>
                     <h2 className="text-2xl font-bold text-gray-800 mb-2">Loading Comparison...</h2>
-                    <p className="text-gray-600">Preparing side-by-side analysis</p>
+                    <p className="text-gray-700">Preparing side-by-side analysis</p>
                 </div>
             </div>
         }>

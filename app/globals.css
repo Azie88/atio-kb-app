@@ -58,3 +58,23 @@ body {
 .delay-200 {
   animation-delay: 0.2s;
 }
+
+/* Optimize for touch devices */
+@media (hover: none) and (pointer: coarse) {
+
+  button,
+  a,
+  input[type="checkbox"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Reduce animations on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

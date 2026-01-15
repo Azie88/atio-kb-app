@@ -86,8 +86,8 @@ export default function ChatBot({ technologies }: ChatBotProps) {
                             >
                                 <div
                                     className={`max-w-[80%] p-3 rounded-lg ${msg.role === 'user'
-                                            ? 'bg-green-600 text-white'
-                                            : 'bg-gray-100 text-gray-800'
+                                        ? 'bg-green-600 text-white'
+                                        : 'bg-gray-100 text-gray-800'
                                         }`}
                                 >
                                     {msg.content}
@@ -98,9 +98,9 @@ export default function ChatBot({ technologies }: ChatBotProps) {
                             <div className="flex justify-start">
                                 <div className="bg-gray-100 p-3 rounded-lg">
                                     <div className="flex gap-1">
-                                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
-                                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200"></div>
+                                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
+                                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-100"></div>
+                                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-200"></div>
                                     </div>
                                 </div>
                             </div>
