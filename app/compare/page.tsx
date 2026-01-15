@@ -94,15 +94,15 @@ function CompareContent() {
                             <tbody>
                                 {/* Description */}
                                 <tr className="border-b hover:bg-gray-50">
-                                    <td className="px-6 py-4 font-semibold bg-gray-50 sticky left-0 z-10">Description</td>
+                                    <td className="px-6 py-4 font-semibold bg-gray-50 sticky left-0 z-10 text-gray-800">Description</td>
                                     {techsToCompare.map(tech => (
-                                        <td key={tech.id} className="px-6 py-4">{tech.description}</td>
+                                        <td key={tech.id} className="px-6 py-4 text-gray-700">{tech.description}</td>
                                     ))}
                                 </tr>
 
                                 {/* Cost */}
                                 <tr className="border-b hover:bg-gray-50">
-                                    <td className="px-6 py-4 font-semibold bg-gray-50 sticky left-0 z-10">Cost Level</td>
+                                    <td className="px-6 py-4 font-semibold bg-gray-50 sticky left-0 z-10 text-gray-800">Cost Level</td>
                                     {techsToCompare.map(tech => (
                                         <td key={tech.id} className="px-6 py-4">
                                             <div className={`inline-block px-3 py-1 rounded-full text-sm font-bold ${tech.cost === 'Low' ? 'bg-green-100 text-green-800' :
@@ -118,7 +118,7 @@ function CompareContent() {
 
                                 {/* Maturity */}
                                 <tr className="border-b hover:bg-gray-50">
-                                    <td className="px-6 py-4 font-semibold bg-gray-50 sticky left-0 z-10">Maturity Level</td>
+                                    <td className="px-6 py-4 font-semibold bg-gray-50 sticky left-0 z-10 text-gray-800">Maturity Level</td>
                                     {techsToCompare.map(tech => (
                                         <td key={tech.id} className="px-6 py-4">
                                             <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
@@ -130,7 +130,7 @@ function CompareContent() {
 
                                 {/* Adoption Rate */}
                                 <tr className="border-b hover:bg-gray-50">
-                                    <td className="px-6 py-4 font-semibold bg-gray-50 sticky left-0 z-10">Adoption Rate</td>
+                                    <td className="px-6 py-4 font-semibold bg-gray-50 sticky left-0 z-10 text-gray-800">Adoption Rate</td>
                                     {techsToCompare.map(tech => (
                                         <td key={tech.id} className="px-6 py-4">
                                             <div className="flex items-center gap-2">
@@ -148,7 +148,7 @@ function CompareContent() {
 
                                 {/* Regions */}
                                 <tr className="border-b hover:bg-gray-50">
-                                    <td className="px-6 py-4 font-semibold bg-gray-50 sticky left-0 z-10">Target Regions</td>
+                                    <td className="px-6 py-4 font-semibold bg-gray-50 sticky left-0 z-10 text-gray-800">Target Regions</td>
                                     {techsToCompare.map(tech => (
                                         <td key={tech.id} className="px-6 py-4">
                                             <div className="flex flex-wrap gap-2">
@@ -164,9 +164,9 @@ function CompareContent() {
 
                                 {/* Benefits */}
                                 <tr className="border-b hover:bg-gray-50">
-                                    <td className="px-6 py-4 font-semibold bg-gray-50 sticky left-0 z-10">Key Benefits</td>
+                                    <td className="px-6 py-4 font-semibold bg-gray-50 sticky left-0 z-10 text-gray-800">Key Benefits</td>
                                     {techsToCompare.map(tech => (
-                                        <td key={tech.id} className="px-6 py-4">
+                                        <td key={tech.id} className="px-6 py-4 text-gray-700">
                                             <ul className="space-y-2">
                                                 {tech.benefits.map((benefit, idx) => (
                                                     <li key={idx} className="text-sm flex items-start">
@@ -181,9 +181,9 @@ function CompareContent() {
 
                                 {/* Challenges */}
                                 <tr className="border-b hover:bg-gray-50">
-                                    <td className="px-6 py-4 font-semibold bg-gray-50 sticky left-0 z-10">Main Challenges</td>
+                                    <td className="px-6 py-4 font-semibold bg-gray-50 sticky left-0 z-10 text-gray-800">Main Challenges</td>
                                     {techsToCompare.map(tech => (
-                                        <td key={tech.id} className="px-6 py-4">
+                                        <td key={tech.id} className="px-6 py-4 text-gray-700">
                                             <ul className="space-y-2">
                                                 {tech.challenges.map((challenge, idx) => (
                                                     <li key={idx} className="text-sm flex items-start">
@@ -198,7 +198,7 @@ function CompareContent() {
 
                                 {/* Suitable For */}
                                 <tr className="border-b hover:bg-gray-50">
-                                    <td className="px-6 py-4 font-semibold bg-gray-50 sticky left-0 z-10">Suitable For</td>
+                                    <td className="px-6 py-4 font-semibold bg-gray-50 sticky left-0 z-10 text-gray-800">Suitable For</td>
                                     {techsToCompare.map(tech => (
                                         <td key={tech.id} className="px-6 py-4">
                                             <div className="flex flex-wrap gap-2">

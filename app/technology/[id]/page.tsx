@@ -171,8 +171,8 @@ export default function TechnologyDetail() {
 
                         {/* Compare Button */}
                         <Link
-                            href={`/compare?ids=${tech.id}`}
-                            className="block w-full bg-green-600 text-white text-center py-3 rounded-lg hover:bg-green-700 transition-colors font-medium"
+                            href={`/?compare=${tech.id}`}
+                            className="block w-full bg-green-600 text-white text-center py-3 rounded-lg hover:bg-green-700 transition-all font-bold shadow-md hover:scale-[1.02] active:scale-95"
                         >
                             Compare with Others
                         </Link>
@@ -182,24 +182,53 @@ export default function TechnologyDetail() {
                 <div className="mt-8 bg-white rounded-lg shadow p-6">
                     <h2 className="text-2xl font-bold text-gray-800 mb-4">Similar Technologies</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {allTechnologies
-                            .filter(t => t.category === tech.category && t.id !== tech.id)
-                            .slice(0, 3)
-                            .map(similar => (
-                                <div key={similar.id} className="border rounded-lg p-4 hover:border-green-500 transition-colors">
+                        {(() => {
+                            // 1. Same category first
+                            let similar = allTechnologies.filter(t => t.category === tech.category && t.id !== tech.id);
+
+                            // 2. If not enough, add matches with same "Suitable For"
+                            if (similar.length < 3) {
+                                const others = allTechnologies.filter(t =>
+                                    t.id !== tech.id &&
+                                    !similar.find(s => s.id === t.id) &&
+                                    t.suitable_for.some(s => tech.suitable_for.includes(s))
+                                );
+                                similar = [...similar, ...others];
+                            }
+
+                            // 3. Still not enough? Add random others
+                            if (similar.length < 3) {
+                                const others = allTechnologies.filter(t =>
+                                    t.id !== tech.id &&
+                                    !similar.find(s => s.id === t.id)
+                                );
+                                similar = [...similar, ...others];
+                            }
+
+                            return similar.slice(0, 3).map(similar => (
+                                <div key={similar.id} className="border border-gray-100 rounded-lg p-4 hover:border-green-500 hover:shadow-md transition-all group">
                                     <div className="flex items-center gap-3 mb-2">
-                                        <span className="text-2xl">{similar.icon}</span>
-                                        <h3 className="font-bold">{similar.name}</h3>
+                                        <span className="text-2xl transform group-hover:scale-110 transition-transform">{similar.icon}</span>
+                                        <h3 className="font-bold text-gray-800">{similar.name}</h3>
                                     </div>
-                                    <p className="text-sm text-gray-600 mb-3">{similar.description}</p>
-                                    <Link
-                                        href={`/compare?ids=${tech.id},${similar.id}`}
-                                        className="text-green-600 text-sm hover:text-green-700 font-medium"
-                                    >
-                                        Compare with {tech.name} →
-                                    </Link>
+                                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">{similar.description}</p>
+                                    <div className="flex items-center justify-between">
+                                        <Link
+                                            href={`/technology/${similar.id}`}
+                                            className="text-green-600 text-sm hover:underline font-medium"
+                                        >
+                                            View Details
+                                        </Link>
+                                        <Link
+                                            href={`/compare?ids=${tech.id},${similar.id}`}
+                                            className="text-gray-500 text-xs hover:text-green-600 font-medium bg-gray-50 px-2 py-1 rounded"
+                                        >
+                                            Quick Compare →
+                                        </Link>
+                                    </div>
                                 </div>
-                            ))}
+                            ));
+                        })()}
                     </div>
                 </div>
             </main>

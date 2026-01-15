@@ -48,7 +48,7 @@ export default function MatcherPage() {
                 </div>
             </header>
 
-            <main className="max-w-4xl mx-auto px-4 pb-12">
+            <main className="max-w-7xl mx-auto px-4 pb-12">
                 {loading && (
                     <div className="flex flex-col items-center justify-center py-20">
                         <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-green-600 mb-4"></div>

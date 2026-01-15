@@ -40,8 +40,8 @@ export default function PolicyPage() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
-            <header className="bg-white shadow-sm mb-8">
-                <div className="max-w-7xl mx-auto px-4 py-6">
+            <header className="bg-white shadow-sm mb-6">
+                <div className="max-w-7xl mx-auto px-4 py-4 md:py-5">
                     <Link href="/" className="text-purple-600 hover:text-purple-700 font-medium mb-2 inline-block">
                         ← Back to Home
                     </Link>

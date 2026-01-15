@@ -58,11 +58,11 @@ export default function ContextMatcher({ technologies }: Props) {
     };
 
     return (
-        <div className="bg-gradient-to-br from-blue-50 to-green-50 rounded-lg shadow-md p-6 mb-8 border-2 border-blue-200">
+        <div className="bg-white rounded-lg shadow-md p-6 mb-8 border-2 border-blue-200">
             <h2 className="text-2xl font-bold text-gray-800 mb-2 flex items-center gap-2">
                 🎯 Contextual Technology Matcher
             </h2>
-            <p className="text-gray-700 mb-4">
+            <p className="text-gray-800 mb-4">
                 Find technologies suitable for your specific context
             </p>
 
@@ -76,7 +76,7 @@ export default function ContextMatcher({ technologies }: Props) {
                         <select
                             value={userContext.region}
                             onChange={(e) => setUserContext({ ...userContext, region: e.target.value })}
-                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="mb-2 w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 font-medium"
                         >
                             <option value="">Select region...</option>
                             <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>
@@ -99,7 +99,7 @@ export default function ContextMatcher({ technologies }: Props) {
                         <select
                             value={userContext.incomeLevel}
                             onChange={(e) => setUserContext({ ...userContext, incomeLevel: e.target.value })}
-                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="text-gray-900 font-medium mb-2 w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         >
                             <option value="">Select income level...</option>
                             <option value="Low-income">Low-income (LIC)</option>
@@ -117,7 +117,7 @@ export default function ContextMatcher({ technologies }: Props) {
                         <select
                             value={userContext.environment}
                             onChange={(e) => setUserContext({ ...userContext, environment: e.target.value })}
-                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="text-gray-900 font-medium mb-2 w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         >
                             <option value="">Select challenge...</option>
                             <option value="Water-scarce">Water scarcity / Drought</option>
@@ -132,7 +132,7 @@ export default function ContextMatcher({ technologies }: Props) {
                     <button
                         onClick={() => setShowResults(true)}
                         disabled={!userContext.region && !userContext.incomeLevel && !userContext.environment}
-                        className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 font-bold disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 font-bold disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all active:scale-[0.98]"
                     >
                         🔍 Find Suitable Technologies
                     </button>
@@ -147,7 +147,7 @@ export default function ContextMatcher({ technologies }: Props) {
                     </button>
 
                     <div className="bg-white rounded-lg p-4 mb-4">
-                        <h3 className="font-bold mb-2">Your Context:</h3>
+                        <h3 className="font-bold mb-2 text-gray-900">Your Context:</h3>
                         <div className="flex flex-wrap gap-2">
                             {userContext.region && (
                                 <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
@@ -190,7 +190,7 @@ export default function ContextMatcher({ technologies }: Props) {
                                                     <h4 className="font-bold text-lg">{tech.name}</h4>
                                                 </div>
                                                 <div className="text-right">
-                                                    <div className="text-sm text-gray-700">Suitability Score</div>
+                                                    <div className="text-sm text-gray-800 font-medium">Suitability Score</div>
                                                     <div className={`text-2xl font-bold ${score >= 70 ? 'text-green-600' :
                                                         score >= 40 ? 'text-yellow-600' : 'text-orange-600'
                                                         }`}>
@@ -198,7 +198,7 @@ export default function ContextMatcher({ technologies }: Props) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <p className="text-sm text-gray-700 mb-3">{tech.description}</p>
+                                            <p className="text-sm text-gray-800 leading-relaxed mb-3">{tech.description}</p>
 
                                             <div className="flex flex-wrap gap-2 mb-3">
                                                 <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
@@ -215,8 +215,8 @@ export default function ContextMatcher({ technologies }: Props) {
                                                 </span>
                                             </div>
 
-                                            <div className="text-xs text-gray-700 mb-2">
-                                                <strong>Why it matches:</strong>
+                                            <div className="text-xs text-gray-800 mb-2">
+                                                <strong className="text-gray-900">Why it matches:</strong>
                                                 <ul className="list-disc list-inside mt-1">
                                                     {userContext.region && tech.regions.includes(userContext.region) && (
                                                         <li>Proven success in {userContext.region}</li>

@@ -37,15 +37,15 @@ export default function RecommendationsPage() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
-            <header className="bg-white shadow-sm mb-8 text-center md:text-left">
-                <div className="max-w-4xl mx-auto px-4 py-6">
+            <header className="bg-white shadow-sm mb-6">
+                <div className="max-w-7xl mx-auto px-4 py-4 md:py-6">
                     <Link href="/" className="text-green-600 hover:text-green-700 font-medium mb-3 md:mb-2 inline-block">
                         ← Back to Home
                     </Link>
                     <h1 className="text-2xl md:text-3xl font-bold text-gray-900 capitalize leading-tight">
                         {persona ? `Recommendations for ${persona}s` : 'Get Personalized Recommendations'}
                     </h1>
-                    <p className="text-gray-700 mt-2 md:mt-1 max-w-2xl mx-auto md:mx-0">
+                    <p className="text-gray-700 mt-2 md:mt-1 max-w-2xl">
                         {persona === 'Farmer'
                             ? 'Finding practical and affordable solutions to help you grow more with less.'
                             : persona === 'Researcher'
@@ -55,7 +55,7 @@ export default function RecommendationsPage() {
                 </div>
             </header>
 
-            <main className="max-w-4xl mx-auto px-4 pb-12">
+            <main className="max-w-7xl mx-auto px-4 pb-12">
                 {loading && (
                     <div className="flex flex-col items-center justify-center py-20">
                         <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-green-600 mb-4"></div>

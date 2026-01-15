@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRef } from 'react';
 import { supabase, Technology } from '../lib/supabase';
 import ChatBot from '../components/ChatBot';
 
@@ -25,6 +26,7 @@ export default function Home() {
   const [technologies, setTechnologies] = useState<Technology[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const catalogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function fetchTechnologies() {
@@ -38,6 +40,19 @@ export default function Home() {
         if (error) throw error;
 
         setTechnologies(data || []);
+
+        // Check for comparison IDs in URL
+        const params = new URLSearchParams(window.location.search);
+        const compareIds = params.get('compare');
+        if (compareIds) {
+          const ids = compareIds.split(',').map(id => parseInt(id)).filter(id => !isNaN(id));
+          setSelectedForComparison(ids.slice(0, 3));
+
+          // Scroll to catalog after a short delay to ensure rendering
+          setTimeout(() => {
+            catalogRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
+        }
       } catch (error: any) {
         console.error('Error fetching technologies:', error);
         setError(error.message);
@@ -88,13 +103,13 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
       {/* Header */}
       <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
+        <div className="max-w-7xl mx-auto px-4 py-4 md:py-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-green-700">
-                🌾 ATIO Knowledge Base
+              <h1 className="text-2xl md:text-3xl font-bold text-green-700">
+                ATIO Knowledge Base
               </h1>
-              <p className="text-gray-700 mt-2">
+              <p className="text-gray-700 text-sm mt-1">
                 Discover, Compare & Adopt Agrifood Technologies
               </p>
             </div>
@@ -131,7 +146,7 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 py-12">
         {/* Persona Portal */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center italic">
+          <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
             Exploring as a...
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -224,7 +239,7 @@ export default function Home() {
           <>
 
             {/* Search Bar */}
-            <div className="max-w-2xl mx-auto mb-12">
+            <div ref={catalogRef} id="catalog" className="max-w-2xl mx-auto mb-12 scroll-mt-10">
               <div className="flex flex-col sm:flex-row gap-3">
                 <div className="relative flex-1">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
@@ -259,50 +274,57 @@ export default function Home() {
                 </button>
               ))}
             </div>
-            <div className="flex items-center justify-center gap-3 mb-8">
-              <span className="text-gray-700 font-medium">Max Budget:</span>
-              <div className="flex gap-2">
-                {['All', 'Low', 'Medium', 'High'].map(cost => (
-                  <button
-                    key={cost}
-                    onClick={() => setMaxCost(cost)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${maxCost === cost
-                      ? cost === 'Low' ? 'bg-green-600 text-white' :
-                        cost === 'Medium' ? 'bg-yellow-500 text-white' :
-                          cost === 'High' ? 'bg-red-600 text-white' :
-                            'bg-gray-600 text-white'
-                      : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
-                      }`}
-                  >
-                    💰 {cost}
-                  </button>
-                ))}
+            <div className="flex flex-col items-center justify-center gap-4 mb-12">
+              <div className="flex items-center gap-3">
+                <span className="text-gray-700 font-medium">Max Budget:</span>
+                <div className="flex gap-2">
+                  {['All', 'Low', 'Medium', 'High'].map(cost => (
+                    <button
+                      key={cost}
+                      onClick={() => setMaxCost(cost)}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${maxCost === cost
+                        ? cost === 'Low' ? 'bg-green-600 text-white' :
+                          cost === 'Medium' ? 'bg-yellow-500 text-white' :
+                            cost === 'High' ? 'bg-red-600 text-white' :
+                              'bg-gray-600 text-white'
+                        : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+                        }`}
+                    >
+                      💰 {cost}
+                    </button>
+                  ))}
+                </div>
               </div>
+              <p className="text-center text-gray-700 text-sm font-medium">
+                💡 Select 2 or more technologies (max 3) to compare them side-by-side.
+              </p>
             </div>
             {/* Technology Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredTechnologies.length > 0 ? (
                 filteredTechnologies.map(tech => (
-                  <div key={tech.id} className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow p-6 relative">
-                    <div className="absolute top-3 left-3">
-                      <input
-                        type="checkbox"
-                        checked={selectedForComparison.includes(tech.id)}
-                        onChange={() => toggleSelection(tech.id)}
-                        disabled={selectedForComparison.length >= 3 && !selectedForComparison.includes(tech.id)}
-                        className="w-5 h-5 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
-                      />
-                    </div>
-                    <div className="flex items-start justify-between mb-3 pl-8">
-                      <span className={`text-xs font-semibold px-3 py-1 rounded-full ${tech.category === 'Water Management' ? 'bg-blue-100 text-blue-800' :
-                        tech.category === 'Energy' ? 'bg-yellow-100 text-yellow-800' :
-                          tech.category === 'Crop Innovation' ? 'bg-green-100 text-green-800' :
-                            tech.category === 'Digital Tools' ? 'bg-purple-100 text-purple-800' :
-                              'bg-gray-100 text-gray-800'
-                        }`}>
-                        {tech.category}
-                      </span>
-                      <span className="text-2xl">{tech.icon}</span>
+                  <div key={tech.id} className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all p-5 relative group/card">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <label className="flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={selectedForComparison.includes(tech.id)}
+                            onChange={() => toggleSelection(tech.id)}
+                            disabled={selectedForComparison.length >= 3 && !selectedForComparison.includes(tech.id)}
+                            className="w-5 h-5 rounded border-gray-300 text-green-600 focus:ring-green-500 cursor-pointer disabled:opacity-30 transition-all"
+                          />
+                        </label>
+                        <span className={`text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-md ${tech.category === 'Water Management' ? 'bg-blue-50 text-blue-700 border border-blue-100' :
+                          tech.category === 'Energy' ? 'bg-yellow-50 text-yellow-700 border border-yellow-100' :
+                            tech.category === 'Crop Innovation' ? 'bg-green-50 text-green-700 border border-green-100' :
+                              tech.category === 'Digital Tools' ? 'bg-purple-50 text-purple-700 border border-purple-100' :
+                                'bg-gray-50 text-gray-700 border border-gray-100'
+                          }`}>
+                          {tech.category}
+                        </span>
+                      </div>
+                      <span className="text-2xl transform group-hover/card:scale-110 transition-transform">{tech.icon}</span>
                     </div>
                     <h3 className="text-xl font-bold text-gray-800 mb-2">
                       {tech.name}
@@ -339,7 +361,7 @@ export default function Home() {
       {/* Comparison Floating Bar */}
       {selectedForComparison.length > 0 && (
         <div className="fixed bottom-0 left-0 right-0 bg-white shadow-2xl border-t-4 border-green-500 p-6 z-50 animate-slide-up">
-          <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="max-w-7xl mx-auto flex items-center justify-between pr-20 md:pr-24">
             <div className="flex items-center gap-4">
               <span className="font-bold text-gray-800">
                 {selectedForComparison.length} selected for comparison

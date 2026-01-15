@@ -35,15 +35,22 @@ export default function AnalyticsPage() {
         sum + parseFloat(tech.adoption_rate), 0) / totalTech;
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4 md:p-8">
-            <div className="max-w-7xl mx-auto">
-                <Link href="/" className="text-green-600 hover:text-green-700 mb-4 inline-block font-medium">
-                    ← Back to Home
-                </Link>
+        <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+            <header className="bg-white shadow-sm mb-8">
+                <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+                    <Link href="/" className="text-green-600 hover:text-green-700 mb-2 inline-block font-medium">
+                        ← Back to Home
+                    </Link>
+                    <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
+                        📊 ATIO Analytics Dashboard
+                    </h1>
+                    <p className="text-gray-600 mt-1">
+                        Comprehensive overview of agrifood technologies and adoption metrics.
+                    </p>
+                </div>
+            </header>
 
-                <h1 className="text-3xl md:text-4xl font-bold mb-8 text-gray-900 leading-tight">
-                    📊 ATIO Analytics Dashboard
-                </h1>
+            <main className="max-w-7xl mx-auto px-4 pb-12">
 
                 {/* KPIs */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -139,7 +146,7 @@ export default function AnalyticsPage() {
                         </div>
                     </Link>
                 </div>
-            </div>
+            </main>
         </div>
     );
 }
