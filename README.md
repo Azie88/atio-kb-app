@@ -37,6 +37,7 @@ atio-knowledge-app/
 ├── lib/                    # Shared utilities & configurations
 │   ├── supabase.ts         # Client initialization & types
 │   └── recommendations.ts  # Matching & scoring algorithm
+├── .env.example            # Environment variables template
 └── public/                 # Static assets
 ```
 
